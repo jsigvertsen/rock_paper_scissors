@@ -1,0 +1,78 @@
+<body>
+    <script>
+
+        let computerSelection;
+        let playerSelection;
+
+        let computerScore = 0; // computer starting score
+        let playerScore = 0; // player starting score
+        let roundCounter = 0; // starting round
+
+        // declares the score when called upon
+        function scoreBoard() {
+            return "After Round " + roundCounter + ": YOU " + playerScore + " | COMPUTER " + computerScore;
+        }
+
+        // computer's random input. randomly returns either rock, paper or scissors.
+        function computerPlay() {
+            let options = ["rock", "paper", "scissors"];
+               return options[Math.floor(Math.random()*options.length)]
+        }
+
+        // plays a single round of rock paper scissors.
+        function playRound(computerSelection, playerSelection) {
+            
+            roundCounter++;  // add one to the round counter
+            computerSelection = computerPlay(); // assigning our computerPlay function above to computerSelection
+            playerSelection = prompt("Choose Rock, Paper or Scissors").toLowerCase(); // prompting the user for their selection
+
+            // all draw scenarios
+            if (playerSelection == computerSelection) {
+                return "It's a DRAW! You played " + playerSelection.toUpperCase() + " and Computer played " + computerSelection.toUpperCase() + ".";
+            } 
+            
+            // all player win scenarios
+            else if ((playerSelection == "rock" && computerSelection == "scissors") || (playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissors" && computerSelection == "paper")) {
+                playerScore++; // this is a win for the player so add 1 to player score
+                return "You WIN! You played " + playerSelection.toUpperCase() + " and Computer played " + computerSelection.toUpperCase() + ".";
+            }
+
+            // all player lose scenarios
+            else if ((playerSelection == "rock" && computerSelection == "paper") || (playerSelection == "paper" && computerSelection == "scissors") || (playerSelection == "scissors" && computerSelection == "rock")) {
+                computerScore++; // this is a win for the computer so add 1 to computer score
+                return "You LOSE! You played " + playerSelection.toUpperCase() + " and Computer played " + computerSelection.toUpperCase() + ".";
+            }
+
+            // default/invalid input response
+            else {
+                return "Please enter either Rock, Paper or Scissors";
+            }
+        }
+        
+        function game() {
+
+            // WARNING: UGLINESS. I don't know how to use loops yet so this is what I came up with
+            console.log(playRound(computerSelection, playerSelection)); 
+            console.log(scoreBoard());
+            console.log(playRound(computerSelection, playerSelection));
+            console.log(scoreBoard());
+            console.log(playRound(computerSelection, playerSelection));
+            console.log(scoreBoard());
+            console.log(playRound(computerSelection, playerSelection));
+            console.log(scoreBoard());
+            console.log(playRound(computerSelection, playerSelection));
+            console.log(scoreBoard());
+
+            // Deciding who wins and loses
+            if (computerScore == playerScore) {
+                return console.log("FINAL: TIE! Nobody wins! Final score is: YOU " + playerScore + " | COMPUTER " + computerScore + ".");
+            } else if (playerScore > computerScore) {
+                return console.log("FINAL: You WIN! Final score is: YOU " + playerScore + " | COMPUTER " + computerScore + "."); }
+            else {
+                return console.log("FINAL: You LOSE! Final score is: YOU " + playerScore + " | COMPUTER " + computerScore + "."); }
+        }
+        
+        game()
+    
+    </script>
+</body>
